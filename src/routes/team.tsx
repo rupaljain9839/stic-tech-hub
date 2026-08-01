@@ -34,13 +34,13 @@ function Team() {
         />
 
         <div className="mt-16 space-y-16">
-          {teamGroups.map((group) => {
-            const members = team.filter((m) => m.group === group);
+          {sections.map((section) => {
+            const members = team.filter((m) => section.groups.includes(m.group));
             if (members.length === 0) return null;
             return (
-              <div key={group}>
+              <div key={section.label}>
                 <div className="flex items-center gap-4">
-                  <h3 className="shrink-0 font-display text-lg font-semibold">{group}</h3>
+                  <h3 className="shrink-0 font-display text-lg font-semibold">{section.label}</h3>
                   <span className="h-px flex-1 bg-[image:var(--gradient-brand)] opacity-40" />
                 </div>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,6 +54,7 @@ function Team() {
             );
           })}
         </div>
+
       </div>
     </section>
   );
