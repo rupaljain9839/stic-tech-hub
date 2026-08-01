@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuroraBackground, Reveal, SectionHeading } from "@/components/site/Primitives";
 import { TeamCard } from "@/components/site/Cards";
-import { team, teamGroups } from "@/lib/site-data";
+import { team, type TeamGroup } from "@/lib/site-data";
+
+const sections: { label: string; groups: TeamGroup[] }[] = [
+  { label: "Faculty Mentor", groups: ["Faculty Coordinator"] },
+  { label: "Office Bearers", groups: ["President", "Vice President"] },
+  {
+    label: "Leads",
+    groups: ["Technical Lead", "Event Lead", "Design Lead", "Content Lead"],
+  },
+  { label: "Core Team", groups: ["Core Team"] },
+  { label: "Executive Members", groups: ["Executive Members"] },
+];
+
 
 export const Route = createFileRoute("/team")({
   head: () => ({
