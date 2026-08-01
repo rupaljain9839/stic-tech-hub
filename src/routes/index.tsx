@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Empowering students through technology — hackathons, workshops, bootcamps and student-built projects.",
+          "STIC is a university student technical innovation club: 1000+ members, hackathons, workshops and open-source projects across AI, cloud, security and design.",
       },
     ],
   }),
