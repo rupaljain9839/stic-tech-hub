@@ -43,8 +43,9 @@ function Team() {
         <SectionHeading
           eyebrow="The people"
           title="Built and run by students"
-          subtitle="Nine roles, fifteen teams and one shared inbox — here is who you'll be working with."
+          subtitle="Office bearers and seven departments — here is who you'll be working with."
         />
+
 
         <div className="mt-16 space-y-16">
           {sections.map((section) => {
