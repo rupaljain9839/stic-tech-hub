@@ -33,7 +33,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logo} alt="STIC logo" width={36} height={36} loading="lazy" className="h-9 w-9" />
+            <img src={logo} alt="STIC logo" width={36} height={36} loading="lazy" className="h-9 w-9 rounded-full" />
             <span className="font-display text-lg font-bold">STIC</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">

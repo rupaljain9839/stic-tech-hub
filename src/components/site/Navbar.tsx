@@ -41,7 +41,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center gap-4 px-4 sm:px-6">
         <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label="STIC home">
-          <img src={logo} alt="STIC logo" width={36} height={36} className="h-9 w-9 shrink-0" />
+          <img src={logo} alt="STIC logo" width={36} height={36} className="h-9 w-9 shrink-0 rounded-full" />
           <span className="min-w-0">
             <span className="block truncate font-display text-lg font-bold leading-none">
               STIC

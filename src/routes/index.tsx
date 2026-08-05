@@ -69,7 +69,7 @@ function Home() {
                 alt="STIC club logo"
                 width={96}
                 height={96}
-                className="mx-auto h-24 w-24 drop-shadow-[0_0_40px_color-mix(in_oklab,var(--color-cyan)_45%,transparent)]"
+                className="mx-auto h-24 w-24 rounded-full drop-shadow-[0_0_40px_color-mix(in_oklab,var(--color-cyan)_45%,transparent)]"
               />
             </Reveal>
             <Reveal delay={0.05}>
