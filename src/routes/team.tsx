@@ -4,15 +4,16 @@ import { TeamCard } from "@/components/site/Cards";
 import { team, type TeamGroup } from "@/lib/site-data";
 
 const sections: { label: string; groups: TeamGroup[] }[] = [
-  { label: "Faculty Mentor", groups: ["Faculty Coordinator"] },
   { label: "Office Bearers", groups: ["President", "Vice President"] },
-  {
-    label: "Leads",
-    groups: ["Technical Lead", "Event Lead", "Design Lead", "Content Lead"],
-  },
-  { label: "Core Team", groups: ["Core Team"] },
-  { label: "Executive Members", groups: ["Executive Members"] },
+  { label: "Content & Ideation", groups: ["Content & Ideation"] },
+  { label: "Graphics", groups: ["Graphics"] },
+  { label: "Operations & Management", groups: ["Operations and Management"] },
+  { label: "PR & Outreach", groups: ["PR & Outreach"] },
+  { label: "Technical", groups: ["Technical"] },
+  { label: "Videography & Editing", groups: ["Videography and Editing"] },
+  { label: "Techno Ambassadors", groups: ["Techno Ambassador"] },
 ];
+
 
 
 export const Route = createFileRoute("/team")({
