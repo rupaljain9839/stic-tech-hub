@@ -10,7 +10,8 @@ import {
 } from "@/components/site/Primitives";
 import { EventCard } from "@/components/site/Cards";
 import { events, stats, technologies } from "@/lib/site-data";
-import logo from "@/assets/stic-logo.png";
+import logoAsset from "@/assets/stic-logo.jpg.asset.json";
+const logo = logoAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({

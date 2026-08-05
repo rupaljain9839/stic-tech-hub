@@ -23,7 +23,8 @@ import { Badge } from "@/components/ui/badge";
 import { Counter } from "@/components/site/Primitives";
 import { blogs, events, gallery, projects, resources, team } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/stic-logo.png";
+import logoAsset from "@/assets/stic-logo.jpg.asset.json";
+const logo = logoAsset.url;
 
 export const Route = createFileRoute("/admin")({
   head: () => ({

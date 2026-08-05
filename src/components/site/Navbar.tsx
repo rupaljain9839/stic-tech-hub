@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X, Sparkles } from "lucide-react";
-import logo from "@/assets/stic-logo.png";
+import logoAsset from "@/assets/stic-logo.jpg.asset.json";
+const logo = logoAsset.url;
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
