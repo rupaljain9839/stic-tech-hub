@@ -50,20 +50,22 @@ export const timeline = [
 ];
 
 export type TeamGroup =
-  | "Faculty Coordinator"
   | "President"
   | "Vice President"
-  | "Technical Lead"
-  | "Event Lead"
-  | "Design Lead"
-  | "Content Lead"
-  | "Core Team"
-  | "Executive Members";
+  | "Content & Ideation"
+  | "Graphics"
+  | "Operations and Management"
+  | "PR & Outreach"
+  | "Technical"
+  | "Videography and Editing"
+  | "Techno Ambassador";
 
 export type Member = {
   name: string;
   position: string;
   group: TeamGroup;
+  branch: string;
+  year: string;
   initials: string;
   linkedin: string;
   github: string;
@@ -74,48 +76,87 @@ const m = (
   name: string,
   position: string,
   group: TeamGroup,
+  email: string,
+  branch: string,
+  year: string,
 ): Member => ({
   name,
   position,
   group,
+  branch,
+  year,
+  email,
   initials: name
     .split(" ")
     .map((p) => p[0])
     .join("")
-    .slice(0, 2),
+    .slice(0, 2)
+    .toUpperCase(),
   linkedin: `https://linkedin.com/in/${name.toLowerCase().replace(/\s+/g, "-")}`,
   github: `https://github.com/${name.toLowerCase().replace(/\s+/g, "")}`,
-  email: `${name.toLowerCase().replace(/\s+/g, ".")}@stic.edu`,
 });
 
 export const team: Member[] = [
-  m("Dr. Anita Raghavan", "Faculty Coordinator, Dept. of CSE", "Faculty Coordinator"),
-  m("Aarav Mehta", "President", "President"),
-  m("Sanya Kapoor", "Vice President", "Vice President"),
-  m("Rohan Iyer", "Technical Lead", "Technical Lead"),
-  m("Meera Nair", "Event Lead", "Event Lead"),
-  m("Kabir Sethi", "Design Lead", "Design Lead"),
-  m("Ishita Rao", "Content Lead", "Content Lead"),
-  m("Dev Patel", "Core Team — Backend", "Core Team"),
-  m("Ananya Verma", "Core Team — ML", "Core Team"),
-  m("Yash Kulkarni", "Core Team — Cloud", "Core Team"),
-  m("Nikhil Bose", "Core Team — Security", "Core Team"),
-  m("Tara Menon", "Executive — Outreach", "Executive Members"),
-  m("Arjun Shah", "Executive — Logistics", "Executive Members"),
-  m("Priya Das", "Executive — Media", "Executive Members"),
+  m("Anurag Tiwari", "President", "President", "en24cs3010191@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Kopal Hedau", "Vice President", "Vice President", "en24cs3010541@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Vedant Beohar", "Vice President", "Vice President", "en24cs3040198@medicaps.ac.in", "B.Tech CSE", "3rd"),
+
+  m("Yash Shukla", "Head", "Content & Ideation", "en24cs3011173@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Manasvi Dariya", "Executive", "Content & Ideation", "en24cs3010603@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Aanya Nayak", "Executive", "Content & Ideation", "en24cs3010003@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Akanksha Sharma", "Executive", "Content & Ideation", "en24cs3010082@medicaps.ac.in", "B.Tech CSE", "3rd"),
+
+  m("Divyanshi Pateria", "Head", "Graphics", "en24it3010035@medicaps.ac.in", "B.Tech IT", "3rd"),
+  m("Ridhika Jangir", "Head", "Graphics", "en24cs3040143@medicaps.ac.in", "B.Tech CSE AI", "3rd"),
+  m("Razeena Shaikh", "Executive", "Graphics", "en24cs3040142@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Pratham Raghuvanshi", "Executive", "Graphics", "en24cs3010785@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Yashi Sharma", "Executive", "Graphics", "en24cs3011180@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Kanak Holkar", "Executive", "Graphics", "en24cs3010500@medicaps.ac.in", "B.Tech CSE", "3rd"),
+
+  m("Arindam Dhali", "Head", "Operations and Management", "en24cs3010210@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Shantanu Karkare", "Head", "Operations and Management", "en24cs3010947@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Riddhi Patel", "Executive", "Operations and Management", "en25ca5030089@medicaps.ac.in", "MCA", "2nd"),
+  m("Prakhar Gupta", "Executive", "Operations and Management", "en24cs3060038@medicaps.ac.in", "B.Tech CSBS", "3rd"),
+  m("Nidhi Thakre", "Executive", "Operations and Management", "en24cs3010691@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Arnav Verma", "Executive", "Operations and Management", "en24cs3010217@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Anushka Patidar", "Executive", "Operations and Management", "en24cs3010194@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Tanishq Jain", "Executive", "Operations and Management", "en24cs3011061@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Lavisha Agrawal", "Executive", "Operations and Management", "en24cs3010588@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Arshi Kaushal", "Executive", "Operations and Management", "en24cs3010225@medicaps.ac.in", "B.Tech CSE", "3rd"),
+
+  m("Pratishtha Jaiswal", "Head", "PR & Outreach", "pratishthajaiswal7@gmail.com", "B.Tech Robotics & Automation", "3rd"),
+  m("Varnika Kosta", "Executive", "PR & Outreach", "en24cs3011116@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Shlok Thakur", "Executive", "PR & Outreach", "en24cs3011083@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Divyani Kadam", "Executive", "PR & Outreach", "en24cs3060018@medicaps.ac.in", "B.Tech CSBS", "3rd"),
+  m("Anushka Mahajan", "Executive", "PR & Outreach", "en24cs3010193@medicaps.ac.in", "B.Tech CSE", "3rd"),
+
+  m("Piyush Kumar", "Head", "Technical", "en24cs3010738@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Anushka Rathore", "Executive", "Technical", "en24cs3010195@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Henil Mandge", "Executive", "Technical", "en25me3030013@medicaps.ac.in", "B.Tech Mechanical", "2nd"),
+  m("Varenyam Sharma", "Executive", "Technical", "en24cs3011115@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Rupal Jain", "Executive", "Technical", "en24cs3010885@medicaps.ac.in", "B.Tech CSE", "3rd"),
+
+  m("Suyog Jadhav", "Executive", "Videography and Editing", "en25cs3090224@medicaps.ac.in", "B.Tech Advanced AI (IBM)", "2nd"),
+  m("Rashi Bhayre", "Executive", "Videography and Editing", "en24cs3010838@medicaps.ac.in", "B.Tech CSE", "3rd"),
+  m("Anuj Khodre", "Member", "Videography and Editing", "en25cs3060010@medicaps.ac.in", "B.Tech CSE", "2nd"),
+
+  m("Vidhi Jain", "Head", "Techno Ambassador", "en25cs3011042@medicaps.ac.in", "B.Tech CSE", "2nd"),
+  m("Rishika Retrekar", "Executive", "Techno Ambassador", "en25cs3030046@medicaps.ac.in", "B.Tech CSDS", "2nd"),
+  m("Argho Biswas", "Executive", "Techno Ambassador", "en25cs3090031@medicaps.ac.in", "B.Tech Advanced AI (IBM)", "2nd"),
 ];
 
 export const teamGroups: TeamGroup[] = [
-  "Faculty Coordinator",
   "President",
   "Vice President",
-  "Technical Lead",
-  "Event Lead",
-  "Design Lead",
-  "Content Lead",
-  "Core Team",
-  "Executive Members",
+  "Content & Ideation",
+  "Graphics",
+  "Operations and Management",
+  "PR & Outreach",
+  "Technical",
+  "Videography and Editing",
+  "Techno Ambassador",
 ];
+
 
 export type EventCategory =
   | "Hackathon"
