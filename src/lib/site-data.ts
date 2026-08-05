@@ -58,7 +58,15 @@ export type TeamGroup =
   | "Design Lead"
   | "Content Lead"
   | "Core Team"
-  | "Executive Members";
+  | "Executive Members"
+  | "Core Member"
+  | "Content & Ideation"
+  | "Graphics"
+  | "Operations and Management"
+  | "PR & Outreach"
+  | "Technical"
+  | "Videography and Editing"
+  | "Techno Ambassador";
 
 export type Member = {
   name: string;
@@ -89,20 +97,45 @@ const m = (
 });
 
 export const team: Member[] = [
-  m("Dr. Anita Raghavan", "Faculty Coordinator, Dept. of CSE", "Faculty Coordinator"),
-  m("Aarav Mehta", "President", "President"),
-  m("Sanya Kapoor", "Vice President", "Vice President"),
-  m("Rohan Iyer", "Technical Lead", "Technical Lead"),
-  m("Meera Nair", "Event Lead", "Event Lead"),
-  m("Kabir Sethi", "Design Lead", "Design Lead"),
-  m("Ishita Rao", "Content Lead", "Content Lead"),
-  m("Dev Patel", "Core Team — Backend", "Core Team"),
-  m("Ananya Verma", "Core Team — ML", "Core Team"),
-  m("Yash Kulkarni", "Core Team — Cloud", "Core Team"),
-  m("Nikhil Bose", "Core Team — Security", "Core Team"),
-  m("Tara Menon", "Executive — Outreach", "Executive Members"),
-  m("Arjun Shah", "Executive — Logistics", "Executive Members"),
-  m("Priya Das", "Executive — Media", "Executive Members"),
+  m("Anurag Tiwari", "President", "Core Member"),
+  m("Kopal Hedau", "Vice - President", "Core Member"),
+  m("Vedant Beohar", "Vice - President", "Core Member"),
+  m("Yash Shukla", "Head", "Content & Ideation"),
+  m("Manasvi Dariya", "Executive", "Content & Ideation"),
+  m("Aanya Nayak", "Executive", "Content & Ideation"),
+  m("Akanksha Sharma", "Executive", "Content & Ideation"),
+  m("Divyanshi Pateria", "Head", "Graphics"),
+  m("Ridhika Jangir", "Head", "Graphics"),
+  m("Razeena Shaikh", "Executive", "Graphics"),
+  m("Pratham Raghuvanshi", "Executive", "Graphics"),
+  m("Yashi Sharma", "Executive", "Graphics"),
+  m("Kanak Holkar", "Executive", "Graphics"),
+  m("Arindam Dhali", "Head", "Operations and Management"),
+  m("Shantanu Karkare", "Head", "Operations and Management"),
+  m("Riddhi Patel", "Executive", "Operations and Management"),
+  m("Prakhar Gupta", "Executive", "Operations and Management"),
+  m("Nidhi Thakre", "Executive", "Operations and Management"),
+  m("Arnav Verma", "Executive", "Operations and Management"),
+  m("Anushka Patidar", "Executive", "Operations and Management"),
+  m("Tanishq Jain", "Executive", "Operations and Management"),
+  m("Lavisha Agrawal", "Executive", "Operations and Management"),
+  m("Arshi Kaushal", "Executive", "Operations and Management"),
+  m("Pratishtha Jaiswal", "Head", "PR & Outreach"),
+  m("Varnika Kosta", "Executive", "PR & Outreach"),
+  m("Shlok Thakur", "Executive", "PR & Outreach"),
+  m("Divyani Kadam", "Executive", "PR & Outreach"),
+  m("Anushka Mahajan", "Executive", "PR & Outreach"),
+  m("Piyush Kumar", "Head", "Technical"),
+  m("Anushka Rathore", "Executive", "Technical"),
+  m("Henil Mandge", "Executive", "Technical"),
+  m("Varenyam Sharma", "Executive", "Technical"),
+  m("Rupal Jain", "Executive", "Technical"),
+  m("Suyog Jadhav", "Executive", "Videography and Editing"),
+  m("Rashi Bhayre", "Executive", "Videography and Editing"),
+  m("Anuj Khodre", "Member", "Videography and Editing"),
+  m("Vidhi Jain", "Head", "Techno Ambassador"),
+  m("Rishika Retrekar", "Executive", "Techno Ambassador"),
+  m("Argho Biswas", "Executive", "Techno Ambassador"),
 ];
 
 export const teamGroups: TeamGroup[] = [
@@ -115,6 +148,14 @@ export const teamGroups: TeamGroup[] = [
   "Content Lead",
   "Core Team",
   "Executive Members",
+  "Core Member",
+  "Content & Ideation",
+  "Graphics",
+  "Operations and Management",
+  "PR & Outreach",
+  "Technical",
+  "Videography and Editing",
+  "Techno Ambassador",
 ];
 
 export type EventCategory =

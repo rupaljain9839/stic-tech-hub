@@ -2,8 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Github, Linkedin, Instagram, Twitter, Mail, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
-import logoAsset from "@/assets/stic-logo.jpg.asset.json";
-const logo = logoAsset.url;
+import logo from "@/lib/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 

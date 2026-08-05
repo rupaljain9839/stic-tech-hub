@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import logoAsset from "@/assets/stic-logo.jpg.asset.json";
-const logo = logoAsset.url;
+import logo from "@/lib/logo";
 
 export function LoadingScreen() {
   const [done, setDone] = useState(false);
