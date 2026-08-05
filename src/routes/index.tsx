@@ -10,7 +10,8 @@ import {
 } from "@/components/site/Primitives";
 import { EventCard } from "@/components/site/Cards";
 import { events, stats, technologies } from "@/lib/site-data";
-import logo from "@/assets/stic-logo.png";
+import logoAsset from "@/assets/stic-logo.jpg.asset.json";
+const logo = logoAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -68,7 +69,7 @@ function Home() {
                 alt="STIC club logo"
                 width={96}
                 height={96}
-                className="mx-auto h-24 w-24 drop-shadow-[0_0_40px_color-mix(in_oklab,var(--color-cyan)_45%,transparent)]"
+                className="mx-auto h-24 w-24 rounded-full drop-shadow-[0_0_40px_color-mix(in_oklab,var(--color-cyan)_45%,transparent)]"
               />
             </Reveal>
             <Reveal delay={0.05}>

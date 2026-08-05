@@ -2,7 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { Github, Linkedin, Instagram, Twitter, Mail, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
-import logo from "@/assets/stic-logo.png";
+import logoAsset from "@/assets/stic-logo.jpg.asset.json";
+const logo = logoAsset.url;
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -32,7 +33,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logo} alt="STIC logo" width={36} height={36} loading="lazy" className="h-9 w-9" />
+            <img src={logo} alt="STIC logo" width={36} height={36} loading="lazy" className="h-9 w-9 rounded-full" />
             <span className="font-display text-lg font-bold">STIC</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
