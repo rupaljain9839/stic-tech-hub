@@ -17,7 +17,11 @@ export function TeamCard({ member }: { member: Member }) {
         </div>
       </div>
       <h3 className="mt-4 truncate font-display text-base font-semibold">{member.name}</h3>
-      <p className="mt-1 text-xs text-muted-foreground">{member.position}</p>
+      <p className="mt-1 text-xs text-[var(--color-cyan)]">{member.position}</p>
+      <p className="mt-0.5 text-[11px] text-muted-foreground">
+        {member.branch} · {member.year} year
+      </p>
+
       <div className="mt-4 flex justify-center gap-2 opacity-70 transition-opacity group-hover:opacity-100">
         <a
           href={member.linkedin}
