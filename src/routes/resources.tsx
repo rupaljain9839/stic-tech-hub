@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { AuroraBackground, Reveal, SectionHeading } from "@/components/site/Primitives";
 import { Badge } from "@/components/ui/badge";
-import { resources } from "@/lib/site-data";
+import { useResources } from "@/lib/content";
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
@@ -24,6 +24,8 @@ export const Route = createFileRoute("/resources")({
 });
 
 function Resources() {
+  const { data: resources = [] } = useResources();
+
   return (
     <section className="relative overflow-hidden">
       <AuroraBackground particles={14} />
@@ -35,7 +37,7 @@ function Resources() {
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {resources.map((r, i) => (
-            <Reveal key={r.title} delay={i * 0.06}>
+            <Reveal key={r.id} delay={i * 0.06}>
               <a
                 href={r.link}
                 className="glass gradient-border glow-hover group flex h-full flex-col rounded-2xl p-6"
@@ -61,6 +63,11 @@ function Resources() {
             </Reveal>
           ))}
         </div>
+        {resources.length === 0 && (
+          <p className="mt-16 text-center text-muted-foreground">
+            Resources are being updated — check back shortly.
+          </p>
+        )}
       </div>
     </section>
   );
