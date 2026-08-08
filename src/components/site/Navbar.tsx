@@ -22,6 +22,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { data: session } = useSession();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
