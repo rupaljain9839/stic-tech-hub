@@ -17,6 +17,7 @@ import { Footer } from "@/components/site/Footer";
 import { BackToTop, ScrollProgress } from "@/components/site/ScrollUtilities";
 import { LoadingScreen } from "@/components/site/LoadingScreen";
 import { Toaster } from "@/components/ui/sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
