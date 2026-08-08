@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Clock, User } from "lucide-react";
 import { AuroraBackground, Reveal, SectionHeading } from "@/components/site/Primitives";
 import { Badge } from "@/components/ui/badge";
-import { blogs } from "@/lib/site-data";
+import { useBlogs } from "@/lib/content";
 
 export const Route = createFileRoute("/blogs")({
   head: () => ({
@@ -24,6 +24,8 @@ export const Route = createFileRoute("/blogs")({
 });
 
 function Blogs() {
+  const { data: blogs = [] } = useBlogs();
+
   return (
     <section className="relative overflow-hidden">
       <AuroraBackground particles={14} />
@@ -35,7 +37,7 @@ function Blogs() {
         />
         <div className="mt-12 grid gap-5">
           {blogs.map((b, i) => (
-            <Reveal key={b.title} delay={i * 0.06}>
+            <Reveal key={b.id} delay={i * 0.06}>
               <article className="glass gradient-border glow-hover rounded-2xl p-6 sm:p-7">
                 <div className="flex flex-wrap items-center gap-3">
                   <Badge variant="brand">{b.tag}</Badge>
@@ -43,7 +45,7 @@ function Blogs() {
                     <User className="size-3.5" /> {b.author}
                   </span>
                   <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <Clock className="size-3.5" /> {b.readTime} · {b.date}
+                    <Clock className="size-3.5" /> {b.read_time} · {b.date_label}
                   </span>
                 </div>
                 <h3 className="mt-4 text-balance font-display text-xl font-semibold">{b.title}</h3>
@@ -52,6 +54,9 @@ function Blogs() {
             </Reveal>
           ))}
         </div>
+        {blogs.length === 0 && (
+          <p className="mt-16 text-center text-muted-foreground">No posts published yet.</p>
+        )}
       </div>
     </section>
   );
