@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AuroraBackground, Reveal, SectionHeading } from "@/components/site/Primitives";
 import { EventCard } from "@/components/site/Cards";
-import { eventCategories, events } from "@/lib/site-data";
+import { imageFor, useEvents } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/events")({
@@ -26,7 +26,27 @@ export const Route = createFileRoute("/events")({
 
 function Events() {
   const [filter, setFilter] = useState<string>("All");
-  const filtered = filter === "All" ? events : events.filter((e) => e.category === filter);
+  const { data: rows = [] } = useEvents();
+
+  const items = useMemo(
+    () =>
+      rows.map((e, i) => ({
+        id: e.id,
+        title: e.title,
+        category: e.category,
+        date: e.date_label,
+        venue: e.venue,
+        description: e.description,
+        image: imageFor(e.image_url, i),
+      })),
+    [rows],
+  );
+
+  const categories = useMemo(
+    () => Array.from(new Set(items.map((e) => e.category))).filter(Boolean),
+    [items],
+  );
+  const filtered = filter === "All" ? items : items.filter((e) => e.category === filter);
 
   return (
     <section className="relative overflow-hidden">
@@ -39,7 +59,7 @@ function Events() {
         />
 
         <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {["All", ...eventCategories].map((c) => (
+          {["All", ...categories].map((c) => (
             <button
               key={c}
               onClick={() => setFilter(c)}
@@ -58,7 +78,7 @@ function Events() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((e, i) => (
-            <Reveal key={e.title} delay={i * 0.06}>
+            <Reveal key={e.id} delay={i * 0.06}>
               <EventCard event={e} />
             </Reveal>
           ))}
