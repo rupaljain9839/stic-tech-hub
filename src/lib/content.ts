@@ -64,7 +64,14 @@ export type ProjectRow = {
   sort_order: number;
 };
 
-async function selectAll<T>(table: string) {
+export type ContentTable =
+  | "resources"
+  | "club_events"
+  | "blogs"
+  | "gallery_items"
+  | "club_projects";
+
+async function selectAll<T>(table: ContentTable) {
   const { data, error } = await supabase
     .from(table)
     .select("*")
@@ -73,6 +80,7 @@ async function selectAll<T>(table: string) {
   if (error) throw error;
   return (data ?? []) as T[];
 }
+
 
 export const contentKeys = {
   resources: ["content", "resources"] as const,
