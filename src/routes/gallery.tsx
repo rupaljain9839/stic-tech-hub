@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Expand } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { AuroraBackground, Reveal, SectionHeading } from "@/components/site/Primitives";
-import { gallery, galleryCategories } from "@/lib/site-data";
+import { imageFor, useGallery } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/gallery")({
@@ -28,7 +28,24 @@ export const Route = createFileRoute("/gallery")({
 function Gallery() {
   const [filter, setFilter] = useState<string>("All");
   const [active, setActive] = useState<number | null>(null);
-  const items = gallery.filter((g) => filter === "All" || g.category === filter);
+  const { data: rows = [] } = useGallery();
+
+  const all = useMemo(
+    () =>
+      rows.map((g, i) => ({
+        id: g.id,
+        caption: g.caption,
+        category: g.category,
+        span: g.span,
+        src: imageFor(g.image_url, i),
+      })),
+    [rows],
+  );
+  const categories = useMemo(
+    () => Array.from(new Set(all.map((g) => g.category))).filter(Boolean),
+    [all],
+  );
+  const items = all.filter((g) => filter === "All" || g.category === filter);
   const current = active !== null ? items[active] : null;
 
   return (
@@ -42,7 +59,7 @@ function Gallery() {
         />
 
         <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {["All", ...galleryCategories].map((c) => (
+          {["All", ...categories].map((c) => (
             <button
               key={c}
               onClick={() => {
@@ -64,7 +81,7 @@ function Gallery() {
 
         <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5">
           {items.map((g, i) => (
-            <Reveal key={`${g.caption}-${i}`}>
+            <Reveal key={g.id}>
               <button
                 onClick={() => setActive(i)}
                 className="group relative block w-full overflow-hidden rounded-2xl border border-border"
