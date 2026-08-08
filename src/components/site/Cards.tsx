@@ -53,7 +53,11 @@ export function TeamCard({ member }: { member: Member }) {
   );
 }
 
-export function EventCard({ event }: { event: ClubEvent }) {
+export function EventCard({
+  event,
+}: {
+  event: Omit<ClubEvent, "category"> & { category: string };
+}) {
   return (
     <article className="glass gradient-border glow-hover group flex flex-col overflow-hidden rounded-2xl">
       <div className="relative aspect-[16/9] overflow-hidden">
