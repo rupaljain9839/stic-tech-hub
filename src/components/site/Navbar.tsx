@@ -100,10 +100,8 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button asChild variant="outline" className="mt-3 w-full">
-            <Link to={session ? "/admin" : "/login"}>{session ? "Console" : "Sign in"}</Link>
-          </Button>
-          <Button asChild variant="hero" className="mt-2 w-full">
+          <Button asChild variant="hero" className="mt-3 w-full">
+
             <Link to="/contact">Join Club</Link>
           </Button>
 
