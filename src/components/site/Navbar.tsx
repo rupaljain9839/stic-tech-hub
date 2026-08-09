@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, X, Sparkles, LogIn, LayoutDashboard } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import logo from "@/lib/logo";
 import { Button } from "@/components/ui/button";
-import { useSession } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -22,7 +21,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { data: session } = useSession();
+  
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -68,19 +67,7 @@ export function Navbar() {
         </ul>
 
         <div className="ml-auto flex items-center gap-2 lg:ml-0">
-          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <Link to={session ? "/admin" : "/login"}>
-              {session ? (
-                <>
-                  <LayoutDashboard className="size-4" /> Console
-                </>
-              ) : (
-                <>
-                  <LogIn className="size-4" /> Sign in
-                </>
-              )}
-            </Link>
-          </Button>
+
           <Button asChild variant="hero" size="sm" className="hidden sm:inline-flex">
             <Link to="/contact">
               <Sparkles className="size-4" /> Join Club
@@ -113,10 +100,8 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button asChild variant="outline" className="mt-3 w-full">
-            <Link to={session ? "/admin" : "/login"}>{session ? "Console" : "Sign in"}</Link>
-          </Button>
-          <Button asChild variant="hero" className="mt-2 w-full">
+          <Button asChild variant="hero" className="mt-3 w-full">
+
             <Link to="/contact">Join Club</Link>
           </Button>
 
