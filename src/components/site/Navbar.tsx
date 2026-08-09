@@ -67,19 +67,7 @@ export function Navbar() {
         </ul>
 
         <div className="ml-auto flex items-center gap-2 lg:ml-0">
-          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <Link to={session ? "/admin" : "/login"}>
-              {session ? (
-                <>
-                  <LayoutDashboard className="size-4" /> Console
-                </>
-              ) : (
-                <>
-                  <LogIn className="size-4" /> Sign in
-                </>
-              )}
-            </Link>
-          </Button>
+
           <Button asChild variant="hero" size="sm" className="hidden sm:inline-flex">
             <Link to="/contact">
               <Sparkles className="size-4" /> Join Club
