@@ -130,32 +130,19 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const router = useRouter();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isAdmin = pathname.startsWith("/admin");
-
-  useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event) => {
-      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
-      void queryClient.invalidateQueries({ queryKey: ["auth"] });
-      void router.invalidate();
-      if (event !== "SIGNED_OUT") void queryClient.invalidateQueries();
-    });
-    return () => data.subscription.unsubscribe();
-  }, [queryClient, router]);
-
 
   return (
     <QueryClientProvider client={queryClient}>
       <LoadingScreen />
       <ScrollProgress />
-      {!isAdmin && <Navbar />}
-      <main className={isAdmin ? "" : "pt-20"}>
+      <Navbar />
+      <main className="pt-20">
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
       </main>
-      {!isAdmin && <Footer />}
+      <Footer />
       <BackToTop />
+
       <Toaster position="top-right" />
     </QueryClientProvider>
   );
