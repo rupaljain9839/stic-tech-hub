@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, X, Sparkles, LogIn, LayoutDashboard } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import logo from "@/lib/logo";
 import { Button } from "@/components/ui/button";
-import { useSession } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 const links = [
