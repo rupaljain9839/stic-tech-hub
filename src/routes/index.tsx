@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Calendar, Rocket, Users, Code2, Trophy } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  ArrowRight,
+  Code2,
+  GraduationCap,
+  Lightbulb,
+  Rocket,
+  Target,
+  Trophy,
+  Users,
+} from "lucide-react";
 import {
   AuroraBackground,
   Counter,
@@ -8,210 +16,203 @@ import {
   SectionHeading,
   TypingEffect,
 } from "@/components/site/Primitives";
-import { EventCard } from "@/components/site/Cards";
-import { events, stats, technologies } from "@/lib/site-data";
+import {
+  CtaBand,
+  EventCard,
+  FeatureCard,
+  StatCard,
+  TestimonialCard,
+} from "@/components/site/Cards";
+import { Button } from "@/components/ui/button";
 import logo from "@/lib/logo";
+import { events, features, heroStats, technologies, testimonials } from "@/lib/mock";
+
+const icons = { Lightbulb, Users, GraduationCap, Target } as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "STIC — Student Technical Innovation Club" },
+      { title: "STIC Tech Hub — Student Technical Innovation Club" },
       {
         name: "description",
         content:
-          "STIC is a university student technical innovation club: 1000+ members, hackathons, workshops and open-source projects across AI, cloud, security and design.",
+          "STIC Tech Hub is a student technology community running hackathons, workshops and open-source projects. Ideas today, innovation tomorrow.",
       },
-      { property: "og:title", content: "STIC — Student Technical Innovation Club" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "STIC Tech Hub — Student Technical Innovation Club" },
       {
         property: "og:description",
         content:
-          "STIC is a university student technical innovation club: 1000+ members, hackathons, workshops and open-source projects across AI, cloud, security and design.",
+          "Hackathons, workshops, research and open-source projects built by students, for students.",
       },
     ],
   }),
   component: Home,
 });
 
-const pillars = [
-  {
-    Icon: Code2,
-    title: "Build weekly",
-    body: "Hands-on labs where every session ends with something running on your machine.",
-  },
-  {
-    Icon: Users,
-    title: "15 technical teams",
-    body: "AI, cloud, security, web, app, robotics, design, content — pick your lane, switch anytime.",
-  },
-  {
-    Icon: Trophy,
-    title: "Compete nationally",
-    body: "Contest prep, travel support and mentors who have won the events you're entering.",
-  },
-  {
-    Icon: Rocket,
-    title: "Ship in public",
-    body: "Open-source repos, demo days and a portfolio you can actually show recruiters.",
-  },
-];
-
 function Home() {
+  const upcoming = events.filter((e) => e.status !== "past").slice(0, 3);
+  const featured = testimonials.slice(0, 3);
+
   return (
     <>
+      {/* ---------------------------------------------------------- hero */}
       <section className="relative overflow-hidden">
-        <AuroraBackground particles={34} />
-        <div className="mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <Reveal>
-              <img
-                src={logo}
-                alt="STIC club logo"
-                width={96}
-                height={96}
-                className="mx-auto h-24 w-24 rounded-full drop-shadow-[0_0_40px_color-mix(in_oklab,var(--color-cyan)_45%,transparent)]"
+        <AuroraBackground particles={30} />
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-28 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:pt-36">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-cyan)]">
+              <Rocket className="size-3.5" /> Ideas today, innovation tomorrow
+            </span>
+            <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+              We build{" "}
+              <TypingEffect
+                words={["AI products", "hackathon winners", "open source", "future engineers"]}
               />
-            </Reveal>
-            <Reveal delay={0.05}>
-              <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-cyan)]">
-                Student Technical Innovation Club
-              </span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h1 className="mt-5 text-balance text-4xl font-bold leading-[1.05] sm:text-6xl">
-                Empowering Students Through Technology
-              </h1>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <p className="mx-auto mt-5 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
-                We are a community of builders learning{" "}
-                <TypingEffect
-                  words={["Artificial Intelligence", "Cloud Native", "Cybersecurity", "Product Design"]}
-                  className="font-display font-semibold"
-                />{" "}
-                — together, in public, every week.
-              </p>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Button asChild variant="hero" size="lg">
-                  <Link to="/contact">
-                    Join Club <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="glass" size="lg">
-                  <Link to="/events">
-                    <Calendar className="size-4" /> Explore Events
-                  </Link>
-                </Button>
-              </div>
-            </Reveal>
-          </div>
+              <span className="block">at STIC Tech Hub</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
+              A student-run technical innovation club where beginners become builders — through
+              weekly hands-on sessions, mentor-backed projects and events that ship real software.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button asChild variant="hero" size="lg">
+                <Link to="/contact">
+                  Join Community <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="glass" size="lg">
+                <Link to="/events">Explore Events</Link>
+              </Button>
+            </div>
+          </Reveal>
 
-          <div className="mt-20 grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.08}>
-                <div className="glass gradient-border glow-hover rounded-2xl p-6 text-center">
-                  <p className="font-display text-3xl font-bold gradient-text sm:text-4xl">
-                    <Counter value={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="mt-2 text-xs uppercase tracking-widest text-muted-foreground">
-                    {s.label}
-                  </p>
+          <Reveal delay={0.15}>
+            <div className="relative mx-auto grid max-w-sm place-items-center">
+              <div
+                className="absolute inset-0 animate-float-slow rounded-full opacity-70 blur-3xl"
+                style={{ background: "var(--gradient-glow)" }}
+              />
+              <div className="glass gradient-border relative w-full rounded-3xl p-8 text-center">
+                <div className="relative mx-auto size-32">
+                  <div className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-[var(--color-cyan)]/60" />
+                  <img
+                    src={logo}
+                    alt="STIC Tech Hub logo"
+                    width={112}
+                    height={112}
+                    className="absolute inset-2 size-28 rounded-full object-cover"
+                  />
                 </div>
+                <p className="mt-6 font-display text-lg font-semibold">Student Technical</p>
+                <p className="font-display text-lg font-semibold gradient-text">Innovation Club</p>
+                <div className="mt-6 grid grid-cols-3 gap-2 text-[11px] text-muted-foreground">
+                  <span className="rounded-lg border border-border py-2">15 Teams</span>
+                  <span className="rounded-lg border border-border py-2">7 Tracks</span>
+                  <span className="rounded-lg border border-border py-2">4 Years</span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* stats */}
+        <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {heroStats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.07}>
+                <StatCard label={s.label}>
+                  <Counter value={s.value} suffix={s.suffix} />
+                </StatCard>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-y border-border bg-[var(--color-surface)] py-6">
-        <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-          <div className="flex w-max animate-marquee gap-3">
-            {[...technologies, ...technologies].map((t, i) => (
-              <span
-                key={`${t}-${i}`}
-                className="rounded-full border border-border px-5 py-2 font-mono text-sm text-muted-foreground"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
+      {/* ------------------------------------------------------ tech strip */}
+      <section className="overflow-hidden border-y border-border bg-[var(--color-surface)] py-5">
+        <div className="flex w-max animate-marquee gap-10 pr-10">
+          {[...technologies, ...technologies].map((t, i) => (
+            <span
+              key={`${t}-${i}`}
+              className="flex items-center gap-2 whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground"
+            >
+              <Code2 className="size-3.5 text-[var(--color-cyan)]" /> {t}
+            </span>
+          ))}
         </div>
       </section>
 
+      {/* -------------------------------------------------------- features */}
       <section className="section-pad mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Why STIC"
-          title="A club built like an engineering team"
-          subtitle="Structured tracks, real mentorship and a culture where shipping beats sitting in lectures about shipping."
+          title="Four pillars behind everything we run"
+          subtitle="Innovation, collaboration, learning and leadership — each backed by a real program, not a slogan."
         />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.08}>
-              <div className="glass gradient-border glow-hover h-full rounded-2xl p-6">
-                <span
-                  className="grid size-11 place-items-center rounded-xl text-primary-foreground"
-                  style={{ background: "var(--gradient-brand)" }}
-                >
-                  <p.Icon className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{p.body}</p>
-              </div>
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((f, i) => (
+            <Reveal key={f.title} delay={i * 0.07}>
+              <FeatureCard Icon={icons[f.icon as keyof typeof icons]} title={f.title} body={f.body} />
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="section-pad relative overflow-hidden">
-        <AuroraBackground particles={14} />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      {/* -------------------------------------------------- upcoming events */}
+      <section className="border-y border-border bg-[var(--color-surface)]">
+        <div className="section-pad mx-auto max-w-7xl px-4 sm:px-6">
           <SectionHeading
-            eyebrow="Upcoming"
-            title="Next on the calendar"
-            subtitle="Hackathons, workshops and bootcamps open to every branch and every year."
+            eyebrow="What's next"
+            title="Upcoming & ongoing events"
+            subtitle="Free for members unless a materials fee is listed. Bring a laptop and curiosity."
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {events.slice(0, 3).map((e, i) => (
-              <Reveal key={e.title} delay={i * 0.08}>
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {upcoming.map((e, i) => (
+              <Reveal key={e.id} delay={i * 0.07}>
                 <EventCard event={e} />
               </Reveal>
             ))}
           </div>
-          <div className="mt-10 text-center">
-            <Button asChild variant="glass" size="lg">
+          <div className="mt-12 text-center">
+            <Button asChild variant="glass">
               <Link to="/events">
-                View all events <ArrowRight className="size-4" />
+                See all events <ArrowRight className="size-4" />
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6">
-        <Reveal>
-          <div className="glass relative overflow-hidden rounded-3xl px-6 py-14 text-center">
-            <div
-              className="pointer-events-none absolute inset-x-0 -top-24 h-64 opacity-60"
-              style={{ background: "var(--gradient-glow)" }}
-            />
-            <h2 className="text-balance text-3xl font-bold sm:text-4xl">
-              Applications for the new semester are open
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Join 1000+ students building the things they wish existed on campus.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button asChild variant="hero" size="lg">
-                <Link to="/contact">Join Club</Link>
-              </Button>
-              <Button asChild variant="glass" size="lg">
-                <Link to="/sponsors">Become a Sponsor</Link>
-              </Button>
-            </div>
-          </div>
-        </Reveal>
+      {/* ---------------------------------------------------- testimonials */}
+      <section className="section-pad mx-auto max-w-7xl px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="Community voices"
+          title="What members say about STIC"
+          subtitle="Students, alumni and faculty on what changes once you start shipping in public."
+        />
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {featured.map((t, i) => (
+            <Reveal key={t.id} delay={i * 0.07}>
+              <TestimonialCard testimonial={t} />
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-12 flex flex-wrap justify-center gap-3">
+          <Button asChild variant="glass">
+            <Link to="/testimonials">Read more stories</Link>
+          </Button>
+          <Button asChild variant="glass">
+            <Link to="/achievements">
+              <Trophy className="size-4" /> Our achievements
+            </Link>
+          </Button>
+        </div>
       </section>
+
+      <CtaBand />
     </>
   );
 }
