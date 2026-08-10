@@ -29,7 +29,7 @@ export const Route = createFileRoute("/achievements")({
       },
     ],
   }),
-  component: Achievements;
+  component: Achievements,
 });
 
 function Achievements() {
