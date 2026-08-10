@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { ArrowLeft, Lock, Mail, ShieldCheck, User } from "lucide-react";
 import { toast } from "sonner";
 import { AuroraBackground } from "@/components/site/Primitives";
