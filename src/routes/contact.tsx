@@ -1,211 +1,280 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Twitter } from "lucide-react";
+import { useState } from "react";
+import {
+  Clock,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Twitter,
+} from "lucide-react";
 import { toast } from "sonner";
 import { AuroraBackground, Reveal, SectionHeading } from "@/components/site/Primitives";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { CtaBand } from "@/components/site/Cards";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { faqs } from "@/lib/site-data";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { contactInfo, faqs } from "@/lib/mock";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Join — STIC" },
+      { title: "Contact STIC Tech Hub — Join, Collaborate or Sponsor" },
       {
         name: "description",
         content:
-          "Join STIC or get in touch: contact form, campus location, email, phone, social links and frequently asked questions.",
+          "Reach STIC Tech Hub for membership, event collaborations or sponsorships. Email, phone, campus location and FAQs.",
       },
-      { property: "og:title", content: "Contact & Join — STIC" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Contact STIC Tech Hub" },
       {
         property: "og:description",
-        content: "Membership is free for enrolled students — send us a message to get started.",
+        content: "Membership, collaborations and sponsorship enquiries — all in one place.",
       },
     ],
   }),
   component: Contact,
 });
 
-const schema = z.object({
-  name: z.string().trim().min(2, "Enter your full name").max(100),
-  email: z.string().trim().email("Enter a valid email").max(255),
-  subject: z.string().trim().min(3, "Add a short subject").max(120),
-  message: z.string().trim().min(10, "Tell us a bit more").max(1000),
-});
-
 const socials = [
-  { href: "https://github.com/stic", label: "GitHub", Icon: Github },
-  { href: "https://linkedin.com/company/stic", label: "LinkedIn", Icon: Linkedin },
-  { href: "https://instagram.com/stic", label: "Instagram", Icon: Instagram },
-  { href: "https://twitter.com/stic", label: "X", Icon: Twitter },
+  { href: "https://github.com/stictechhub", label: "GitHub", Icon: Github },
+  { href: "https://linkedin.com/company/stictechhub", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://instagram.com/stictechhub", label: "Instagram", Icon: Instagram },
+  { href: "https://twitter.com/stictechhub", label: "X", Icon: Twitter },
 ];
 
+type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;
+
 function Contact() {
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", subject: "", message: "" },
-  });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [errors, setErrors] = useState<Errors>({});
+  const [sending, setSending] = useState(false);
+
+  const set = (key: keyof typeof form) => (value: string) =>
+    setForm((f) => ({ ...f, [key]: value }));
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const next: Errors = {};
+    if (form.name.trim().length < 2) next.name = "Please enter your full name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = "Enter a valid email address.";
+    if (form.subject.trim().length < 3) next.subject = "Add a short subject.";
+    if (form.message.trim().length < 15) next.message = "Tell us a bit more (15+ characters).";
+    setErrors(next);
+    if (Object.keys(next).length > 0) return;
+
+    setSending(true);
+    setTimeout(() => {
+      setSending(false);
+      setForm({ name: "", email: "", subject: "", message: "" });
+      toast.success("Message sent", {
+        description: "This is a demo form — no data leaves your browser yet.",
+      });
+    }, 800);
+  };
 
   return (
-    <section className="relative overflow-hidden">
-      <AuroraBackground particles={16} />
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <SectionHeading
-          eyebrow="Contact"
-          title="Say hello, or ask to join"
-          subtitle="We reply to every message within two working days during the semester."
-        />
+    <>
+      <section className="relative overflow-hidden">
+        <AuroraBackground particles={20} />
+        <div className="mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 lg:pt-36">
+          <SectionHeading
+            eyebrow="Contact"
+            title="Let's talk — membership, events or sponsorship"
+            subtitle="We reply to most messages within two working days."
+          />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-5">
-          <Reveal className="lg:col-span-3">
-            <div className="glass rounded-2xl p-6 sm:p-8">
-              <Form {...form}>
-                <form
-                  className="grid gap-5"
-                  onSubmit={form.handleSubmit((values) => {
-                    toast.success(`Thanks ${values.name.split(" ")[0]}! Your message is on its way.`);
-                    form.reset();
-                  })}
-                >
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Full name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Aarav Mehta" maxLength={100} {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="you@university.edu"
-                              maxLength={255}
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <FormField
-                    control={form.control}
-                    name="subject"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Subject</FormLabel>
-                        <FormControl>
-                          <Input placeholder="I'd like to join the ML team" maxLength={120} {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+          <div className="mt-14 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            {/* form */}
+            <Reveal>
+              <form onSubmit={submit} className="glass gradient-border rounded-2xl p-6 sm:p-8" noValidate>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Field
+                    id="name"
+                    label="Full name"
+                    value={form.name}
+                    onChange={set("name")}
+                    error={errors.name}
+                    placeholder="Ananya Sharma"
                   />
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea rows={6} maxLength={1000} placeholder="Tell us about yourself…" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                  <Field
+                    id="email"
+                    label="Email"
+                    type="email"
+                    value={form.email}
+                    onChange={set("email")}
+                    error={errors.email}
+                    placeholder="you@university.edu"
                   />
-                  <Button type="submit" variant="hero" size="lg" className="justify-self-start">
-                    Send message
-                  </Button>
-                </form>
-              </Form>
-            </div>
-          </Reveal>
+                </div>
+                <div className="mt-5">
+                  <Field
+                    id="subject"
+                    label="Subject"
+                    value={form.subject}
+                    onChange={set("subject")}
+                    error={errors.subject}
+                    placeholder="Membership enquiry"
+                  />
+                </div>
+                <div className="mt-5 grid gap-2">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea
+                    id="message"
+                    rows={6}
+                    value={form.message}
+                    onChange={(e) => set("message")(e.target.value)}
+                    placeholder="Tell us what you're interested in…"
+                    aria-invalid={!!errors.message}
+                  />
+                  {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
+                </div>
+                <Button type="submit" variant="hero" size="lg" className="mt-7 w-full" disabled={sending}>
+                  {sending ? "Sending…" : (
+                    <>
+                      Send message <Send className="size-4" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Reveal>
 
-          <Reveal delay={0.1} className="lg:col-span-2">
-            <div className="grid gap-6">
-              <div className="glass rounded-2xl p-6">
-                <h3 className="font-display text-lg font-semibold">Reach us directly</h3>
-                <ul className="mt-4 grid gap-3 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-3">
-                    <Mail className="size-4 shrink-0 text-[var(--color-cyan)]" />
-                    <a href="mailto:hello@stic.edu" className="hover:text-foreground">
-                      hello@stic.edu
+            {/* info */}
+            <Reveal delay={0.1}>
+              <div className="grid gap-4">
+                <div className="glass grid gap-4 rounded-2xl p-6">
+                  <InfoRow Icon={Mail} label="Email">
+                    <a href={`mailto:${contactInfo.email}`} className="hover:text-foreground">
+                      {contactInfo.email}
                     </a>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <Phone className="size-4 shrink-0 text-[var(--color-cyan)]" />
-                    <a href="tel:+919876543210" className="hover:text-foreground">
-                      +91 98765 43210
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 size-4 shrink-0 text-[var(--color-cyan)]" />
-                    Innovation Block C, Dept. of Computer Science, University Campus
-                  </li>
-                </ul>
-                <div className="mt-5 flex gap-2">
-                  {socials.map(({ href, label, Icon }) => (
+                  </InfoRow>
+                  <InfoRow Icon={Phone} label="Phone">
                     <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={label}
-                      className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[var(--color-cyan)] hover:text-foreground"
+                      href={`tel:${contactInfo.phone.replace(/\s+/g, "")}`}
+                      className="hover:text-foreground"
                     >
-                      <Icon className="size-4" />
+                      {contactInfo.phone}
                     </a>
-                  ))}
+                  </InfoRow>
+                  <InfoRow Icon={MapPin} label="Address">
+                    {contactInfo.address}
+                  </InfoRow>
+                  <InfoRow Icon={Clock} label="Office hours">
+                    {contactInfo.hours}
+                  </InfoRow>
+                  <div className="flex gap-2 pt-1">
+                    {socials.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={s.label}
+                        className="grid size-10 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]"
+                      >
+                        <s.Icon className="size-4" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="glass overflow-hidden rounded-2xl">
+                  <iframe
+                    title="Campus location map"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=75.79%2C22.68%2C75.90%2C22.76&layer=mapnik"
+                    loading="lazy"
+                    className="h-64 w-full border-0 opacity-90"
+                  />
                 </div>
               </div>
-
-              <div className="glass overflow-hidden rounded-2xl">
-                <iframe
-                  title="STIC campus location map"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=77.55%2C12.95%2C77.62%2C13.01&layer=mapnik"
-                  loading="lazy"
-                  className="h-64 w-full border-0 grayscale-[0.3]"
-                />
-              </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
+      </section>
 
-        <div className="mx-auto mt-24 max-w-3xl">
-          <SectionHeading eyebrow="FAQ" title="Frequently asked questions" />
-          <Accordion type="single" collapsible className="mt-8">
+      <section className="border-t border-border bg-[var(--color-surface)]">
+        <div className="section-pad mx-auto max-w-3xl px-4 sm:px-6">
+          <SectionHeading eyebrow="FAQ" title="Questions we get every semester" />
+          <Accordion type="single" collapsible className="mt-12">
             {faqs.map((f) => (
-              <AccordionItem key={f.q} value={f.q} className="border-border">
-                <AccordionTrigger className="text-left font-display text-base">{f.q}</AccordionTrigger>
+              <AccordionItem key={f.q} value={f.q}>
+                <AccordionTrigger className="text-left font-display">{f.q}</AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <CtaBand />
+    </>
+  );
+}
+
+function Field({
+  id,
+  label,
+  value,
+  onChange,
+  error,
+  placeholder,
+  type = "text",
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  error?: string | undefined;
+  placeholder?: string | undefined;
+  type?: string;
+}) {
+  return (
+    <div className="grid gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Input
+        id={id}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        aria-invalid={!!error}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      {error && <p className="text-xs text-destructive">{error}</p>}
+    </div>
+  );
+}
+
+function InfoRow({
+  Icon,
+  label,
+  children,
+}: {
+  Icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex min-w-0 gap-3">
+      <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-border text-[var(--color-cyan)]">
+        <Icon className="size-4" />
+      </span>
+      <span className="min-w-0">
+        <span className="block text-[11px] uppercase tracking-widest text-muted-foreground">
+          {label}
+        </span>
+        <span className="block text-sm text-muted-foreground">{children}</span>
+      </span>
+    </div>
   );
 }

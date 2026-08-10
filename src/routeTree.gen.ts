@@ -11,14 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as BlogsRouteImport } from './routes/blogs'
+import { Route as AchievementsRouteImport } from './routes/achievements'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EventsRouteImport } from './routes/events'
-import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as ResourcesRouteImport } from './routes/resources'
-import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as TestimonialsRouteImport } from './routes/testimonials'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,9 +29,14 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogsRoute = BlogsRouteImport.update({
-  id: '/blogs',
-  path: '/blogs',
+const AchievementsRoute = AchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -45,24 +49,9 @@ const EventsRoute = EventsRouteImport.update({
   path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GalleryRoute = GalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesRoute = ResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SponsorsRoute = SponsorsRouteImport.update({
-  id: '/sponsors',
-  path: '/sponsors',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeamRoute = TeamRouteImport.update({
@@ -70,94 +59,92 @@ const TeamRoute = TeamRouteImport.update({
   path: '/team',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestimonialsRoute = TestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blogs': typeof BlogsRoute
+  '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
-  '/gallery': typeof GalleryRoute
-  '/projects': typeof ProjectsRoute
-  '/resources': typeof ResourcesRoute
-  '/sponsors': typeof SponsorsRoute
+  '/login': typeof LoginRoute
   '/team': typeof TeamRoute
+  '/testimonials': typeof TestimonialsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blogs': typeof BlogsRoute
+  '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
-  '/gallery': typeof GalleryRoute
-  '/projects': typeof ProjectsRoute
-  '/resources': typeof ResourcesRoute
-  '/sponsors': typeof SponsorsRoute
+  '/login': typeof LoginRoute
   '/team': typeof TeamRoute
+  '/testimonials': typeof TestimonialsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blogs': typeof BlogsRoute
+  '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
-  '/gallery': typeof GalleryRoute
-  '/projects': typeof ProjectsRoute
-  '/resources': typeof ResourcesRoute
-  '/sponsors': typeof SponsorsRoute
+  '/login': typeof LoginRoute
   '/team': typeof TeamRoute
+  '/testimonials': typeof TestimonialsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/blogs'
+    | '/achievements'
+    | '/admin'
     | '/contact'
     | '/events'
-    | '/gallery'
-    | '/projects'
-    | '/resources'
-    | '/sponsors'
+    | '/login'
     | '/team'
+    | '/testimonials'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/blogs'
+    | '/achievements'
+    | '/admin'
     | '/contact'
     | '/events'
-    | '/gallery'
-    | '/projects'
-    | '/resources'
-    | '/sponsors'
+    | '/login'
     | '/team'
+    | '/testimonials'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/blogs'
+    | '/achievements'
+    | '/admin'
     | '/contact'
     | '/events'
-    | '/gallery'
-    | '/projects'
-    | '/resources'
-    | '/sponsors'
+    | '/login'
     | '/team'
+    | '/testimonials'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  BlogsRoute: typeof BlogsRoute
+  AchievementsRoute: typeof AchievementsRoute
+  AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
-  GalleryRoute: typeof GalleryRoute
-  ProjectsRoute: typeof ProjectsRoute
-  ResourcesRoute: typeof ResourcesRoute
-  SponsorsRoute: typeof SponsorsRoute
+  LoginRoute: typeof LoginRoute
   TeamRoute: typeof TeamRoute
+  TestimonialsRoute: typeof TestimonialsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -176,11 +163,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blogs': {
-      id: '/blogs'
-      path: '/blogs'
-      fullPath: '/blogs'
-      preLoaderRoute: typeof BlogsRouteImport
+    '/achievements': {
+      id: '/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AchievementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -197,32 +191,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resources': {
-      id: '/resources'
-      path: '/resources'
-      fullPath: '/resources'
-      preLoaderRoute: typeof ResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sponsors': {
-      id: '/sponsors'
-      path: '/sponsors'
-      fullPath: '/sponsors'
-      preLoaderRoute: typeof SponsorsRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/team': {
@@ -232,20 +205,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/testimonials': {
+      id: '/testimonials'
+      path: '/testimonials'
+      fullPath: '/testimonials'
+      preLoaderRoute: typeof TestimonialsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  BlogsRoute: BlogsRoute,
+  AchievementsRoute: AchievementsRoute,
+  AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
-  GalleryRoute: GalleryRoute,
-  ProjectsRoute: ProjectsRoute,
-  ResourcesRoute: ResourcesRoute,
-  SponsorsRoute: SponsorsRoute,
+  LoginRoute: LoginRoute,
   TeamRoute: TeamRoute,
+  TestimonialsRoute: TestimonialsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

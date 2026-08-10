@@ -8,20 +8,18 @@ import { cn } from "@/lib/utils";
 const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/events", label: "Events" },
   { to: "/team", label: "Team" },
-  { to: "/projects", label: "Projects" },
-  { to: "/resources", label: "Resources" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/blogs", label: "Blogs" },
+  { to: "/events", label: "Events" },
+  { to: "/achievements", label: "Achievements" },
+  { to: "/testimonials", label: "Testimonials" },
   { to: "/contact", label: "Contact" },
+  { to: "/login", label: "Login" },
 ] as const;
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -40,11 +38,17 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center gap-4 px-4 sm:px-6">
-        <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label="STIC home">
-          <img src={logo} alt="STIC logo" width={36} height={36} className="h-9 w-9 shrink-0 rounded-full" />
+        <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label="STIC Tech Hub home">
+          <img
+            src={logo}
+            alt="STIC Tech Hub logo"
+            width={36}
+            height={36}
+            className="h-9 w-9 shrink-0 rounded-full"
+          />
           <span className="min-w-0">
             <span className="block truncate font-display text-lg font-bold leading-none">
-              STIC
+              STIC Tech Hub
             </span>
             <span className="hidden text-[11px] text-muted-foreground sm:block">
               Student Technical Innovation Club
@@ -52,7 +56,7 @@ export function Navbar() {
           </span>
         </Link>
 
-        <ul className="ml-auto hidden items-center gap-1 lg:flex">
+        <ul className="ml-auto hidden items-center gap-0.5 xl:flex">
           {links.map((l) => (
             <li key={l.to}>
               <Link
@@ -66,16 +70,15 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="ml-auto flex items-center gap-2 lg:ml-0">
-
+        <div className="ml-auto flex items-center gap-2 xl:ml-0">
           <Button asChild variant="hero" size="sm" className="hidden sm:inline-flex">
             <Link to="/contact">
-              <Sparkles className="size-4" /> Join Club
+              <Sparkles className="size-4" /> Join Community
             </Link>
           </Button>
 
           <button
-            className="grid size-10 shrink-0 place-items-center rounded-full border border-border lg:hidden"
+            className="grid size-10 shrink-0 place-items-center rounded-full border border-border xl:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -86,7 +89,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="glass mx-4 mt-3 animate-rise rounded-2xl p-3 lg:hidden">
+        <div className="glass mx-4 mt-3 animate-rise rounded-2xl p-3 xl:hidden">
           <ul className="grid gap-1">
             {links.map((l) => (
               <li key={l.to}>
@@ -101,10 +104,8 @@ export function Navbar() {
             ))}
           </ul>
           <Button asChild variant="hero" className="mt-3 w-full">
-
-            <Link to="/contact">Join Club</Link>
+            <Link to="/contact">Join Community</Link>
           </Button>
-
         </div>
       )}
     </header>
