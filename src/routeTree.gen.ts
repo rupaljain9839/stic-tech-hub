@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AchievementsRouteImport } from './routes/achievements'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EventsRouteImport } from './routes/events'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 
@@ -32,6 +34,11 @@ const AchievementsRoute = AchievementsRouteImport.update({
   path: '/achievements',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -40,6 +47,11 @@ const ContactRoute = ContactRouteImport.update({
 const EventsRoute = EventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeamRoute = TeamRouteImport.update({
@@ -57,8 +69,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/login': typeof LoginRoute
   '/team': typeof TeamRoute
   '/testimonials': typeof TestimonialsRoute
 }
@@ -66,8 +80,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/login': typeof LoginRoute
   '/team': typeof TeamRoute
   '/testimonials': typeof TestimonialsRoute
 }
@@ -76,8 +92,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/achievements': typeof AchievementsRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
+  '/login': typeof LoginRoute
   '/team': typeof TeamRoute
   '/testimonials': typeof TestimonialsRoute
 }
@@ -87,8 +105,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
     | '/contact'
     | '/events'
+    | '/login'
     | '/team'
     | '/testimonials'
   fileRoutesByTo: FileRoutesByTo
@@ -96,8 +116,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
     | '/contact'
     | '/events'
+    | '/login'
     | '/team'
     | '/testimonials'
   id:
@@ -105,8 +127,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/achievements'
+    | '/admin'
     | '/contact'
     | '/events'
+    | '/login'
     | '/team'
     | '/testimonials'
   fileRoutesById: FileRoutesById
@@ -115,8 +139,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AchievementsRoute: typeof AchievementsRoute
+  AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
+  LoginRoute: typeof LoginRoute
   TeamRoute: typeof TeamRoute
   TestimonialsRoute: typeof TestimonialsRoute
 }
@@ -144,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AchievementsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -156,6 +189,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/team': {
@@ -179,8 +219,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AchievementsRoute: AchievementsRoute,
+  AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
+  LoginRoute: LoginRoute,
   TeamRoute: TeamRoute,
   TestimonialsRoute: TestimonialsRoute,
 }
