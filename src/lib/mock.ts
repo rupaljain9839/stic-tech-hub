@@ -166,6 +166,7 @@ export const team: TeamMember[] = [
   member("Razeena Shaikh", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
   member("Yashi Sharma", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
   member("Kanak Holkar", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
+  member("Vishesh Birla", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
 
   member(
     "Arindam Dhali",
