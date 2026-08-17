@@ -34,15 +34,15 @@ const whyJoin = [
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About STIC Tech Hub — Mission, Vision & Journey" },
+      { title: "About STIC — Mission, Vision & Journey" },
       {
         name: "description",
         content:
-          "The mission, vision and objectives behind STIC Tech Hub, and the milestones from a 24-student club to a national award-winning community.",
+          "The mission, vision and objectives behind STIC, and the milestones from a 24-student club to a national award-winning community.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "About STIC Tech Hub — Mission, Vision & Journey" },
+      { property: "og:title", content: "About STIC — Mission, Vision & Journey" },
       {
         property: "og:description",
         content: "How a student technical club grew into a nationally recognised innovation community.",
@@ -61,7 +61,7 @@ function About() {
           <SectionHeading
             eyebrow="About the club"
             title="We turn curiosity into shipped software"
-            subtitle="STIC Tech Hub is a student-run technology community inside the Department of Computer Science — open to every branch and every year."
+            subtitle="STIC is a student-run technology community inside the Department of Computer Science — open to every branch and every year."
           />
 
           <div className="mt-14 grid gap-5 lg:grid-cols-2">

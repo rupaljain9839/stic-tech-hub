@@ -11,15 +11,15 @@ import logo from "@/lib/logo";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Sign in — STIC Tech Hub Member Portal" },
+      { title: "Sign in — STIC Member Portal" },
       {
         name: "description",
         content:
-          "Sign in or create a STIC Tech Hub member account to manage events, achievements and club content.",
+          "Sign in or create a STIC member account to manage events, achievements and club content.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Sign in — STIC Tech Hub Member Portal" },
+      { property: "og:title", content: "Sign in — STIC Member Portal" },
       { property: "og:description", content: "Member and admin access to the club portal." },
     ],
   }),
@@ -40,9 +40,9 @@ function Login() {
       <div className="mx-auto grid min-h-screen max-w-7xl items-center gap-12 px-4 py-28 sm:px-6 lg:grid-cols-2">
         {/* brand panel */}
         <div className="hidden lg:block">
-          <img src={logo} alt="STIC Tech Hub logo" width={72} height={72} className="size-18 rounded-full" />
+          <img src={logo} alt="STIC logo" width={72} height={72} className="size-18 rounded-full" />
           <h1 className="mt-8 text-balance text-4xl font-bold leading-tight">
-            Welcome back to <span className="gradient-text">STIC Tech Hub</span>
+            Welcome back to <span className="gradient-text">STIC</span>
           </h1>
           <p className="mt-4 max-w-md text-muted-foreground">
             Manage events, publish achievements and keep the club's story current — all from one

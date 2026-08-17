@@ -10,15 +10,15 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team — Leadership & Core Members | STIC Tech Hub" },
+      { title: "Team — Leadership & Core Members | STIC" },
       {
         name: "description",
         content:
-          "Meet the faculty coordinator, office bearers, technical leads and core members running STIC Tech Hub this year.",
+          "Meet the faculty coordinator, office bearers, technical leads and core members running STIC this year.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Team — Leadership & Core Members | STIC Tech Hub" },
+      { property: "og:title", content: "Team — Leadership & Core Members | STIC" },
       {
         property: "og:description",
         content: "The students and faculty behind our workshops, hackathons and projects.",

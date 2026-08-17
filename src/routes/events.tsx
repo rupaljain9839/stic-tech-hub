@@ -24,15 +24,15 @@ const tabs: { key: EventStatus; label: string }[] = [
 export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
-      { title: "Events — Hackathons, Workshops & Bootcamps | STIC Tech Hub" },
+      { title: "Events — Hackathons, Workshops & Bootcamps | STIC" },
       {
         name: "description",
         content:
-          "Browse STIC Tech Hub events: hackathons, workshops, bootcamps, seminars and coding competitions with dates, venues and registration.",
+          "Browse STIC events: hackathons, workshops, bootcamps, seminars and coding competitions with dates, venues and registration.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Events — Hackathons, Workshops & Bootcamps | STIC Tech Hub" },
+      { property: "og:title", content: "Events — Hackathons, Workshops & Bootcamps | STIC" },
       {
         property: "og:description",
         content: "Filter upcoming, ongoing and past events by category and register in one click.",

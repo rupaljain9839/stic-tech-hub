@@ -27,13 +27,13 @@ export function Footer() {
           <Link to="/" className="flex items-center gap-3">
             <img
               src={logo}
-              alt="STIC Tech Hub logo"
+              alt="STIC logo"
               width={44}
               height={44}
               className="size-11 rounded-full"
             />
             <span>
-              <span className="block font-display text-lg font-bold">STIC Tech Hub</span>
+              <span className="block font-display text-lg font-bold">STIC</span>
               <span className="block text-xs text-muted-foreground">
                 Ideas today, innovation tomorrow.
               </span>
@@ -99,7 +99,7 @@ export function Footer() {
 
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} STIC Tech Hub. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} STIC. All rights reserved.</p>
           <p>Built by students, for students.</p>
         </div>
       </div>

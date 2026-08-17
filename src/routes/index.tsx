@@ -32,15 +32,15 @@ const icons = { Lightbulb, Users, GraduationCap, Target } as const;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "STIC Tech Hub — Student Technical Innovation Club" },
+      { title: "STIC — Students' Technical and Innovation Club" },
       {
         name: "description",
         content:
-          "STIC Tech Hub is a student technology community running hackathons, workshops and open-source projects. Ideas today, innovation tomorrow.",
+          "STIC is a student technology community running hackathons, workshops and open-source projects. Ideas today, innovation tomorrow.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "STIC Tech Hub — Student Technical Innovation Club" },
+      { property: "og:title", content: "STIC — Students' Technical and Innovation Club" },
       {
         property: "og:description",
         content:
@@ -70,7 +70,7 @@ function Home() {
               <TypingEffect
                 words={["AI products", "hackathon winners", "open source", "future engineers"]}
               />
-              <span className="block">at STIC Tech Hub</span>
+              <span className="block">at STIC</span>
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
               A student-run technical innovation club where beginners become builders — through
@@ -99,7 +99,7 @@ function Home() {
                   <div className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-[var(--color-cyan)]/60" />
                   <img
                     src={logo}
-                    alt="STIC Tech Hub logo"
+                    alt="STIC logo"
                     width={112}
                     height={112}
                     className="absolute inset-2 size-28 rounded-full object-cover"
