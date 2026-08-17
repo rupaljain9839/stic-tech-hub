@@ -18,11 +18,11 @@ const groups: TestimonialGroup[] = ["Students", "Alumni", "Faculty"];
 export const Route = createFileRoute("/testimonials")({
   head: () => ({
     meta: [
-      { title: "Testimonials — Student, Alumni & Faculty Voices | STIC Tech Hub" },
+      { title: "Testimonials — Student, Alumni & Faculty Voices | STIC" },
       {
         name: "description",
         content:
-          "What students, alumni and faculty say about STIC Tech Hub: mentorship, hackathon wins, research and placement outcomes.",
+          "What students, alumni and faculty say about STIC: mentorship, hackathon wins, research and placement outcomes.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

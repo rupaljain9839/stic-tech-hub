@@ -1,5 +1,5 @@
 /**
- * Mock content for the STIC Tech Hub frontend.
+ * Mock content for the STIC frontend.
  * Everything here is sample data — no backend calls anywhere.
  */
 import hackathonImg from "@/assets/event-hackathon.jpg";
@@ -574,7 +574,7 @@ export const contactInfo = {
 
 export const faqs = [
   {
-    q: "Who can join STIC Tech Hub?",
+    q: "Who can join STIC?",
     a: "Any enrolled student, from any branch or year. There is no entrance test — only a short interest form and a willingness to build.",
   },
   {

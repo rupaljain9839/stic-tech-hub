@@ -14,11 +14,11 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/achievements")({
   head: () => ({
     meta: [
-      { title: "Achievements — Awards, Research & Milestones | STIC Tech Hub" },
+      { title: "Achievements — Awards, Research & Milestones | STIC" },
       {
         name: "description",
         content:
-          "Hackathon wins, competition results, certifications, research papers and club milestones earned by STIC Tech Hub members.",
+          "Hackathon wins, competition results, certifications, research papers and club milestones earned by STIC members.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -39,16 +39,16 @@ type Section = (typeof nav)[number]["key"];
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — STIC Tech Hub Console" },
+      { title: "Admin Dashboard — STIC Console" },
       {
         name: "description",
         content:
-          "Preview of the STIC Tech Hub admin console: manage events, members, achievements and testimonials.",
+          "Preview of the STIC admin console: manage events, members, achievements and testimonials.",
       },
       { name: "robots", content: "noindex" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Admin Dashboard — STIC Tech Hub Console" },
+      { property: "og:title", content: "Admin Dashboard — STIC Console" },
       { property: "og:description", content: "Club content management dashboard UI preview." },
     ],
   }),

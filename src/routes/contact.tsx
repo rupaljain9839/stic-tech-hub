@@ -29,15 +29,15 @@ import { contactInfo, faqs } from "@/lib/mock";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact STIC Tech Hub — Join, Collaborate or Sponsor" },
+      { title: "Contact STIC — Join, Collaborate or Sponsor" },
       {
         name: "description",
         content:
-          "Reach STIC Tech Hub for membership, event collaborations or sponsorships. Email, phone, campus location and FAQs.",
+          "Reach STIC for membership, event collaborations or sponsorships. Email, phone, campus location and FAQs.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Contact STIC Tech Hub" },
+      { property: "og:title", content: "Contact STIC" },
       {
         property: "og:description",
         content: "Membership, collaborations and sponsorship enquiries — all in one place.",
