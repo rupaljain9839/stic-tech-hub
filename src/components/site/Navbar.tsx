@@ -7,14 +7,16 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
   { to: "/team", label: "Team" },
+  { to: "/courses", label: "Courses" },
   { to: "/events", label: "Events" },
   { to: "/achievements", label: "Achievements" },
   { to: "/testimonials", label: "Testimonials" },
+  { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
   { to: "/login", label: "Login" },
 ] as const;
+
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
