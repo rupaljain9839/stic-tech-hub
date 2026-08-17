@@ -4,13 +4,15 @@ import logo from "@/lib/logo";
 import { contactInfo } from "@/lib/mock";
 
 const quickLinks = [
-  { to: "/about", label: "About" },
   { to: "/team", label: "Team" },
+  { to: "/courses", label: "Courses" },
   { to: "/events", label: "Events" },
   { to: "/achievements", label: "Achievements" },
   { to: "/testimonials", label: "Testimonials" },
+  { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
+
 
 const socials = [
   { href: "https://github.com/stictechhub", label: "GitHub", Icon: Github },
