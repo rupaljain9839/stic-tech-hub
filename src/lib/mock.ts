@@ -603,3 +603,99 @@ export const adminStats = [
   { label: "Total Achievements", value: 42, delta: "+2 this quarter" },
   { label: "Total Testimonials", value: 96, delta: "+11 pending review" },
 ];
+
+/* ------------------------------------------------------- courses */
+
+export type Course = {
+  id: string;
+  title: string;
+  track: string;
+  level: "Beginner" | "Intermediate" | "Advanced";
+  duration: string;
+  lessons: number;
+  mentor: string;
+  summary: string;
+  topics: string[];
+};
+
+export const courseTracks = ["Web", "AI/ML", "Cloud & DevOps", "Cybersecurity", "Core CS"];
+
+export const courses: Course[] = [
+  {
+    id: "c1",
+    title: "Full-Stack Web Development",
+    track: "Web",
+    level: "Beginner",
+    duration: "10 weeks",
+    lessons: 32,
+    mentor: "Aarav Mehta",
+    summary:
+      "Build and deploy production-grade apps with React, TypeScript, APIs and databases from scratch.",
+    topics: ["HTML/CSS", "React", "TypeScript", "REST APIs", "Deployment"],
+  },
+  {
+    id: "c2",
+    title: "Machine Learning Foundations",
+    track: "AI/ML",
+    level: "Intermediate",
+    duration: "8 weeks",
+    lessons: 26,
+    mentor: "Dr. Neha Kulkarni",
+    summary:
+      "Maths-light, project-heavy introduction to supervised learning, model evaluation and deployment.",
+    topics: ["NumPy", "Pandas", "scikit-learn", "Model Eval", "Streamlit"],
+  },
+  {
+    id: "c3",
+    title: "Data Structures & Algorithms",
+    track: "Core CS",
+    level: "Beginner",
+    duration: "12 weeks",
+    lessons: 40,
+    mentor: "Rohit Sharma",
+    summary:
+      "Interview-focused problem solving with weekly contests, editorial reviews and mock rounds.",
+    topics: ["Arrays", "Trees", "Graphs", "DP", "Complexity"],
+  },
+  {
+    id: "c4",
+    title: "Cloud & DevOps Essentials",
+    track: "Cloud & DevOps",
+    level: "Intermediate",
+    duration: "6 weeks",
+    lessons: 20,
+    mentor: "Ishita Verma",
+    summary: "Containerise, automate and ship: Docker, CI pipelines, and cloud fundamentals.",
+    topics: ["Linux", "Docker", "GitHub Actions", "CI/CD", "Monitoring"],
+  },
+  {
+    id: "c5",
+    title: "Applied Cybersecurity",
+    track: "Cybersecurity",
+    level: "Advanced",
+    duration: "8 weeks",
+    lessons: 24,
+    mentor: "Kabir Anand",
+    summary:
+      "Offensive and defensive labs covering web exploitation, network recon and secure coding.",
+    topics: ["OWASP Top 10", "Recon", "Burp Suite", "Crypto Basics", "CTFs"],
+  },
+  {
+    id: "c6",
+    title: "Deep Learning with PyTorch",
+    track: "AI/ML",
+    level: "Advanced",
+    duration: "9 weeks",
+    lessons: 28,
+    mentor: "Ananya Iyer",
+    summary: "Neural networks, CNNs and transformers with a capstone research-style project.",
+    topics: ["Tensors", "CNNs", "Transformers", "Fine-tuning", "Capstone"],
+  },
+];
+
+export const courseStats = [
+  { label: "Active Courses", value: 18, suffix: "" },
+  { label: "Learners Enrolled", value: 940, suffix: "+" },
+  { label: "Student Mentors", value: 36, suffix: "" },
+  { label: "Completion Rate", value: 87, suffix: "%" },
+];
