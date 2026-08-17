@@ -74,27 +74,35 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
 
       <h3 className="mt-4 font-display text-base font-semibold">{member.name}</h3>
       <p className="mt-1 text-xs font-medium text-[var(--color-cyan)]">{member.designation}</p>
-      <p className="mt-0.5 text-[11px] text-muted-foreground">{member.department}</p>
+      {member.department && (
+        <p className="mt-0.5 text-[11px] text-muted-foreground">{member.department}</p>
+      )}
       <p className="mt-3 flex-1 text-sm text-muted-foreground">{member.bio}</p>
 
-      <div className="mt-5 flex justify-center gap-2">
-        <a
-          href={member.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${member.name} on LinkedIn`}
-          className="grid size-9 place-items-center rounded-full border border-border transition-colors hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]"
-        >
-          <Linkedin className="size-4" />
-        </a>
-        <a
-          href={`mailto:${member.email}`}
-          aria-label={`Email ${member.name}`}
-          className="grid size-9 place-items-center rounded-full border border-border transition-colors hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]"
-        >
-          <Mail className="size-4" />
-        </a>
-      </div>
+      {(member.linkedin || member.email) && (
+        <div className="mt-5 flex justify-center gap-2">
+          {member.linkedin && (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${member.name} on LinkedIn`}
+              className="grid size-9 place-items-center rounded-full border border-border transition-colors hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]"
+            >
+              <Linkedin className="size-4" />
+            </a>
+          )}
+          {member.email && (
+            <a
+              href={`mailto:${member.email}`}
+              aria-label={`Email ${member.name}`}
+              className="grid size-9 place-items-center rounded-full border border-border transition-colors hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]"
+            >
+              <Mail className="size-4" />
+            </a>
+          )}
+        </div>
+      )}
     </motion.article>
   );
 }

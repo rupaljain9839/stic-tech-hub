@@ -1,6 +1,6 @@
 # Tech Nexus
 
-Project Name: STIC -Student Technical Innovation Club
+Project Name: STIC - Students' Technical and Innovation Club
 
 Overview
 

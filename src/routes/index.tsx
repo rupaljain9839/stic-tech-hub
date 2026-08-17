@@ -95,18 +95,18 @@ function Home() {
                 style={{ background: "var(--gradient-glow)" }}
               />
               <div className="glass gradient-border relative w-full rounded-3xl p-8 text-center">
-                <div className="relative mx-auto size-32">
+                <div className="relative mx-auto size-40">
                   <div className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-[var(--color-cyan)]/60" />
                   <img
                     src={logo}
                     alt="STIC logo"
-                    width={112}
-                    height={112}
-                    className="absolute inset-2 size-28 rounded-full object-cover"
+                    width={144}
+                    height={144}
+                    className="absolute inset-2 size-36 rounded-full object-cover"
                   />
                 </div>
-                <p className="mt-6 font-display text-lg font-semibold">Student Technical</p>
-                <p className="font-display text-lg font-semibold gradient-text">Innovation Club</p>
+                <p className="mt-6 font-display text-lg font-semibold">Students' Technical</p>
+                <p className="font-display text-lg font-semibold gradient-text">and Innovation Club</p>
                 <div className="mt-6 grid grid-cols-3 gap-2 text-[11px] text-muted-foreground">
                   <span className="rounded-lg border border-border py-2">15 Teams</span>
                   <span className="rounded-lg border border-border py-2">7 Tracks</span>

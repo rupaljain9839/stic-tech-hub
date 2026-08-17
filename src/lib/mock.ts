@@ -17,6 +17,22 @@ export const placeholderImage = (seed: string, i = 0) =>
 export const avatarFor = (name: string) =>
   `https://api.dicebear.com/9.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundType=gradientLinear&fontWeight=600`;
 
+/**
+ * Real team photos, picked up automatically from src/assets/team/.
+ * Drop a file named after the member's id (e.g. "rohan-mehta.jpg") in that
+ * folder and it replaces the generated initials avatar — no code change needed.
+ */
+const teamPhotoFiles = import.meta.glob<{ default: string }>(
+  "../assets/team/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const teamPhotos: Record<string, string> = {};
+for (const path in teamPhotoFiles) {
+  const id = path.split("/").pop()!.replace(/\.[^.]+$/, "");
+  teamPhotos[id] = teamPhotoFiles[path]!.default;
+}
+const photoFor = (id: string, name: string) => teamPhotos[id] ?? avatarFor(name);
+
 /* ------------------------------------------------------------------ stats */
 
 export const heroStats = [
@@ -71,135 +87,147 @@ export type TeamMember = {
   name: string;
   designation: string;
   role: TeamRole;
-  department: string;
+  department?: string;
   bio: string;
-  email: string;
-  linkedin: string;
+  email?: string;
+  linkedin?: string;
   photo: string;
 };
 
-export type TeamRole =
-  | "Faculty"
-  | "Leadership"
-  | "Technical"
-  | "Design"
-  | "Events"
-  | "Marketing"
-  | "Core Team";
+export type TeamRole = "Leadership" | "Technical" | "Design" | "Marketing" | "Operations";
 
 export const teamRoles: TeamRole[] = [
-  "Faculty",
   "Leadership",
   "Technical",
   "Design",
-  "Events",
   "Marketing",
-  "Core Team",
+  "Operations",
 ];
 
 const member = (
   name: string,
   designation: string,
   role: TeamRole,
-  department: string,
   bio: string,
-): TeamMember => ({
-  id: name.toLowerCase().replace(/\s+/g, "-"),
-  name,
-  designation,
-  role,
-  department,
-  bio,
-  email: `${name.split(" ")[0]!.toLowerCase()}@stictechhub.edu`,
-  linkedin: `https://linkedin.com/in/${name.toLowerCase().replace(/\s+/g, "-")}`,
-  photo: avatarFor(name),
-});
+  department?: string,
+): TeamMember => {
+  const id = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return {
+    id,
+    name,
+    designation,
+    role,
+    bio,
+    photo: photoFor(id, name),
+    ...(department ? { department } : {}),
+  };
+};
+
+const technicalBio = "Works on STIC's technical projects and mentors members on the build teams.";
+const designBio = "Shapes STIC's visual identity — event branding, graphics and media.";
+const videoBio = "Shoots and edits video coverage for STIC's events and campaigns.";
+const contentBio = "Shapes campaigns and writes content for STIC's events and socials.";
+const prBio = "Builds partnerships and manages outreach for STIC's events.";
+const ambassadorBio = "Represents STIC on campus and drives outreach for club initiatives.";
+const opsBio = "Handles logistics and on-ground execution for STIC's events.";
+const leadershipBio = "Sets STIC's direction and steers the executive team across every vertical.";
 
 export const team: TeamMember[] = [
+  member("Anurag Tiwari", "President", "Leadership", leadershipBio, "B.Tech CSE"),
+  member("Kopal Hedau", "Vice President", "Leadership", leadershipBio, "B.Tech CSE"),
+  member("Vedant Beohar", "Vice President", "Leadership", leadershipBio, "B.Tech CSE"),
+
   member(
-    "Dr. Ananya Deshmukh",
-    "Faculty Coordinator",
-    "Faculty",
-    "Computer Science & Engineering",
-    "Guides club strategy and industry partnerships. Researches applied ML and edge computing.",
-  ),
-  member(
-    "Rohan Mehta",
-    "President",
-    "Leadership",
-    "Computer Science & Engineering",
-    "Runs the club roadmap and campus-wide programs. Full-stack engineer and hackathon regular.",
-  ),
-  member(
-    "Isha Kulkarni",
-    "Vice President",
-    "Leadership",
-    "Information Technology",
-    "Coordinates departments and mentorship circles. Loves systems design and public speaking.",
-  ),
-  member(
-    "Aditya Rane",
-    "Technical Lead",
-    "Technical",
-    "Computer Science & Engineering",
-    "Leads the build teams across web, AI and cloud. Maintains the club's open-source repos.",
-  ),
-  member(
-    "Sanya Bhatt",
-    "Design Lead",
-    "Design",
-    "Design & Media",
-    "Owns the visual system, event branding and product UX reviews for every club project.",
-  ),
-  member(
-    "Kabir Nair",
-    "Event Coordinator",
-    "Events",
-    "Electronics & Communication",
-    "Plans hackathons and workshops end to end — venues, sponsors, schedules and logistics.",
-  ),
-  member(
-    "Meera Iyer",
-    "Marketing Lead",
+    "Yash Shukla",
+    "Content & Ideation Head",
     "Marketing",
-    "Business Administration",
-    "Handles outreach, social storytelling and collaborations with student communities.",
+    "Leads STIC's Content & Ideation vertical, shaping the club's storytelling and campaigns.",
+    "B.Tech CSE",
+  ),
+  member("Manasvi Dariya", "Content & Ideation Executive", "Marketing", contentBio, "B.Tech CSE"),
+  member("Aanya Nayak", "Content & Ideation Executive", "Marketing", contentBio, "B.Tech CSE"),
+  member("Akanksha Sharma", "Content & Ideation Executive", "Marketing", contentBio, "B.Tech CSE"),
+
+  member("Pratham Raghuvanshi", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
+  member(
+    "Divyanshi Pateria",
+    "Graphics Head",
+    "Design",
+    "Leads STIC's Graphics vertical, shaping the club's visual identity across events and campaigns.",
+    "B.Tech CSE",
   ),
   member(
-    "Arjun Saxena",
-    "Core Member — Backend",
-    "Core Team",
-    "Computer Science & Engineering",
-    "Builds APIs and internal tooling. Ask him about Postgres, queues and observability.",
+    "Ridhika Jangir",
+    "Graphics Head",
+    "Design",
+    "Leads STIC's Graphics vertical, shaping the club's visual identity across events and campaigns.",
+    "B.Tech CSE AI",
+  ),
+  member("Razeena Shaikh", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
+  member("Yashi Sharma", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
+  member("Kanak Holkar", "Graphics Executive", "Design", designBio, "B.Tech CSE"),
+
+  member(
+    "Arindam Dhali",
+    "Operations & Management Head",
+    "Operations",
+    "Leads STIC's Operations vertical — logistics, planning and on-ground execution for every event.",
+    "B.Tech CSE",
   ),
   member(
-    "Nikita Joshi",
-    "Core Member — ML",
-    "Core Team",
-    "Artificial Intelligence & Data Science",
-    "Works on vision models and dataset pipelines for club research submissions.",
+    "Shantanu Karkare",
+    "Operations & Management Head",
+    "Operations",
+    "Leads STIC's Operations vertical — logistics, planning and on-ground execution for every event.",
+    "B.Tech CSE",
   ),
+  member("Riddhi Patel", "Operations & Management Executive", "Operations", opsBio, "MCA"),
+  member("Prakhar Gupta", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSBS"),
+  member("Nidhi Thakre", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSE"),
+  member("Arnav Verma", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSE"),
+  member("Anushka Patidar", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSE"),
+  member("Tanishq Jain", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSE"),
+  member("Lavisha Agrawal", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSE"),
+  member("Arshi Kaushal", "Operations & Management Executive", "Operations", opsBio, "B.Tech CSE"),
+
   member(
-    "Devansh Patel",
-    "Core Member — Cloud",
-    "Core Team",
-    "Information Technology",
-    "Runs deployments and CI for club products. Cloud certified and infra obsessed.",
+    "Pratishtha Jaiswal",
+    "PR & Outreach Head",
+    "Marketing",
+    "Leads STIC's PR & Outreach vertical — partnerships, sponsors and community outreach.",
+    "B.Tech Robotics and Automation",
   ),
+  member("Varnika Kosta", "PR & Outreach Executive", "Marketing", prBio, "B.Tech CSE"),
+  member("Shlok Thakur", "PR & Outreach Executive", "Marketing", prBio, "B.Tech CSE"),
+  member("Divyani Kadam", "PR & Outreach Executive", "Marketing", prBio, "B.Tech CSBS"),
+  member("Anushka Mahajan", "PR & Outreach Executive", "Marketing", prBio, "B.Tech CSE"),
+
   member(
-    "Riya Kapoor",
-    "Core Member — Content",
-    "Core Team",
-    "Computer Science & Engineering",
-    "Writes technical blogs, event recaps and the club's weekly newsletter.",
+    "Piyush Kumar",
+    "Technical Head",
+    "Technical",
+    "Leads STIC's Technical vertical — builds, mentors and ships projects with the team.",
+    "B.Tech CSE",
   ),
+  member("Anushka Rathore", "Technical Executive", "Technical", technicalBio, "B.Tech CSE"),
+  member("Henil Mandge", "Technical Executive", "Technical", technicalBio, "B.Tech Mechanical"),
+  member("Varenyam Sharma", "Technical Executive", "Technical", technicalBio, "B.Tech CSE"),
+  member("Rupal Jain", "Technical Executive", "Technical", technicalBio, "B.Tech CSE"),
+
+  member("Suyog Jadhav", "Videography & Editing Executive", "Design", videoBio, "B.Tech Advanced AI IBM"),
+  member("Rashi Bhayre", "Videography & Editing Executive", "Design", videoBio, "B.Tech CSE"),
+  member("Aditya Malviya", "Videography & Editing Executive", "Design", videoBio, "B.Tech CSE"),
+  member("Anuj Khodre", "Videography & Editing Executive", "Design", videoBio, "B.Tech CSE"),
+
   member(
-    "Yash Verma",
-    "Core Member — Robotics",
-    "Core Team",
-    "Mechanical Engineering",
-    "Builds autonomous rovers and drone prototypes with the hardware squad.",
+    "Vidhi Jain",
+    "Techno Ambassador Head",
+    "Marketing",
+    "Leads STIC's Techno Ambassador program, representing the club across campus.",
+    "B.Tech CSE",
   ),
+  member("Rishika Retrekar", "Techno Ambassador Executive", "Marketing", ambassadorBio, "B.Tech CSDS"),
+  member("Argho Biswas", "Techno Ambassador Executive", "Marketing", ambassadorBio, "B.Tech Advanced AI IBM"),
 ];
 
 /* ----------------------------------------------------------------- events */

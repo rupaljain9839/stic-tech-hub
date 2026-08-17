@@ -10,18 +10,18 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team — Leadership & Core Members | STIC" },
+      { title: "Team — Heads & Executives | STIC" },
       {
         name: "description",
         content:
-          "Meet the faculty coordinator, office bearers, technical leads and core members running STIC this year.",
+          "Meet the leadership, heads and executives across Technical, Design, Marketing and Operations running STIC this year.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Team — Leadership & Core Members | STIC" },
+      { property: "og:title", content: "Team — Heads & Executives | STIC" },
       {
         property: "og:description",
-        content: "The students and faculty behind our workshops, hackathons and projects.",
+        content: "The students behind our workshops, hackathons and projects.",
       },
     ],
   }),
@@ -40,7 +40,7 @@ function Team() {
         !q ||
         m.name.toLowerCase().includes(q) ||
         m.designation.toLowerCase().includes(q) ||
-        m.department.toLowerCase().includes(q);
+        (m.department?.toLowerCase().includes(q) ?? false);
       return matchesRole && matchesQuery;
     });
   }, [query, role]);
@@ -53,7 +53,7 @@ function Team() {
           <SectionHeading
             eyebrow="The people"
             title="Built and run by students"
-            subtitle="A faculty coordinator, office bearers and six departments — here is who you'll be working with."
+            subtitle="Leadership, heads and executives across every vertical — here is who you'll be working with."
           />
 
           <div className="mx-auto mt-12 max-w-xl">
@@ -62,7 +62,7 @@ function Team() {
               <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by name, role or department"
+                placeholder="Search by name or role"
                 aria-label="Search team members"
                 className="h-12 rounded-full pl-11"
               />

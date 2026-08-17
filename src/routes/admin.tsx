@@ -160,8 +160,8 @@ function Admin() {
           )}
           {section === "members" && (
             <DataTable
-              columns={["Name", "Designation", "Department", "Role"]}
-              rows={team.map((m) => [m.name, m.designation, m.department, m.role])}
+              columns={["Name", "Designation", "Role"]}
+              rows={team.map((m) => [m.name, m.designation, m.role])}
               onDelete={notImplemented}
             />
           )}
